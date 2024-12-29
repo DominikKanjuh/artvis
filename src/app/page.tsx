@@ -17,24 +17,25 @@ export default function LandingPage() {
   });
 
   const [heroRef, _heroInView] = useInView({
-    threshold: 0.65,
+    threshold: 0.6,
     triggerOnce: true,
   });
   const [map, mapInView] = useInView({
-    threshold: 0.65,
+    threshold: 0.6,
     delay: 50,
   });
   const [trends, trendsInView] = useInView({
-    threshold: 0.65,
+    threshold: 0.6,
     delay: 50,
   });
   const [demo, demoInView] = useInView({
-    threshold: 0.65,
+    threshold: 0.6,
     delay: 50,
   });
   const [connections, connectionsInView] = useInView({
-    threshold: 0.65,
+    threshold: 0.6,
     delay: 50,
+    rootMargin: "-200px 0px 0px 0px",
   });
 
   const [scrollTimeout, setScrollTimeout] = useState<NodeJS.Timeout | null>(
@@ -106,7 +107,7 @@ export default function LandingPage() {
           className="h-screen min-h-screen max-h-screen flex flex-col items-center justify-center bg-latte"
         >
           <h1 className="text-7xl md:text-9xl font-bold text-center mb-4 text-coffee">
-            ArtViz
+            ArtVis
           </h1>
           <p className="text-3xl md:text-4xl text-center text-espresso">
             Insight into Art
@@ -126,7 +127,7 @@ export default function LandingPage() {
         <VisualizationCard
           ref={trends}
           title="Chronicles of Creativity: Geographic Trends"
-          description="Journey through the art capitals of the world, from continents to cities, and see where masterpieces come alive. This view highlights histograms to explore exhibition trends across continents, countries, and cities."
+          description="Journey through the art capitals of the world, from continents to cities and see where masterpieces come alive. This view highlights histograms to explore exhibition trends across continents, countries and cities."
           link="/geographic-trends"
           image="https://images.metmuseum.org/CRDImages/ep/original/DP346474.jpg"
           imageAlt="View of Toledo by El Greco"
@@ -136,7 +137,7 @@ export default function LandingPage() {
         <VisualizationCard
           ref={demo}
           title="The Artist's Mosaic: Demographics Revealed"
-          description="Discover the lifelines, identities, and origins of the artists who shaped history. This visualization presents artists' lifespan, gender, and nationality distributions based on selected regions and exhibitions."
+          description="Discover the lifelines, identities and origins of the artists who shaped history. This visualization presents artists' lifespan, gender and nationality distributions based on selected regions and exhibitions."
           link="/artist-demographics"
           image="https://images.metmuseum.org/CRDImages/ep/original/DP-1410-001.jpg"
           imageAlt="Self Portrait with a Straw Hat by Vincent van Gogh"
