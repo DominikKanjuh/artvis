@@ -161,7 +161,7 @@ export default function LandingPage() {
   );
 }
 
-const VisualizationCard = motion(
+const VisualizationCard = motion.create(
   forwardRef(
     (
       {
@@ -200,9 +200,9 @@ const VisualizationCard = motion(
             <Image
               src={image}
               alt={imageAlt}
-              layout="fill"
-              objectFit="cover"
               className="absolute inset-0 w-full h-full"
+              style={{ objectFit: "cover" }}
+              fill
               priority
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent md:bg-gradient-to-r md:from-black/70 md:via-black/50 md:to-transparent" />
