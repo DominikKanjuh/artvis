@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 
+import { Footer, VisualizationCard } from "components/custom";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { Footer, VisualizationCard } from "components/custom";
 
 export default function LandingPage() {
   // smooth scroll progress indicator
@@ -38,7 +38,7 @@ export default function LandingPage() {
   });
 
   const [scrollTimeout, setScrollTimeout] = useState<NodeJS.Timeout | null>(
-    null
+    null,
   );
   const [isManualScrolling, setIsManualScrolling] = useState(false);
 

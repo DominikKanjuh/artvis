@@ -11,10 +11,17 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "a11y": {
+        "all": true
+      },
+      "security": {
+        "all": true
+      }
     }
   },
   "formatter": {
-    "enabled": false
+    "enabled": true,
+    "indentStyle": "space"
   }
 }

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { Link, ArrowRight } from "lucide-react";
-import { forwardRef } from "react";
+import { ArrowRight, Link } from "lucide-react";
 import Image from "next/image";
+import { forwardRef } from "react";
 
 const VisualizationCard = motion.create(
   forwardRef(
@@ -23,7 +23,7 @@ const VisualizationCard = motion.create(
         imageLeft: boolean;
         cta: string;
       },
-      ref: React.Ref<HTMLElement>
+      ref: React.Ref<HTMLElement>,
     ) => {
       return (
         <motion.section
@@ -62,8 +62,8 @@ const VisualizationCard = motion.create(
           </div>
         </motion.section>
       );
-    }
-  )
+    },
+  ),
 );
 
 export default VisualizationCard;
