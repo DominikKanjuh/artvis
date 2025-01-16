@@ -188,7 +188,9 @@ function GeographicHistograms({
         </div>
 
         <div>
-          <h3 className="text-lg font-semibold mb-2">Exhibitions</h3>
+          <h3 className="text-lg font-semibold mb-2">
+            Paintings by Exhibition
+          </h3>
           <Popover open={cityOpen} onOpenChange={setCityOpen}>
             <PopoverTrigger asChild>
               <Button

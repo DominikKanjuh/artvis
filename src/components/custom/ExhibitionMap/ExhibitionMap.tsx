@@ -43,19 +43,19 @@ function ExhibitionMap({ data, selectedYear }: ExhibitionMapProps) {
 
       {/* Legend */}
       <div className="absolute top-4 right-4 bg-white p-2 rounded shadow z-[900] opacity-80">
-        <div className="text-sm font-semibold mb-1">Exhibition Types:</div>
+        <div className="text-base font-semibold mb-1">Exhibition Types:</div>
         <div className="flex flex-col gap-1">
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded-full bg-red-500 opacity-60"></div>
-            <span className="text-sm">Group</span>
+            <span className="text-base">Group</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded-full bg-green-500 opacity-60"></div>
-            <span className="text-sm">Auction</span>
+            <span className="text-base">Auction</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded-full bg-blue-500 opacity-60"></div>
-            <span className="text-sm">Solo</span>
+            <span className="text-base">Solo</span>
           </div>
         </div>
       </div>

@@ -38,7 +38,7 @@ export function BarChart({
                 <span>{item.label}</span>
                 <span>{item.value}</span>
               </div>
-              <div className="w-full h-2 bg-gray-200 rounded-full">
+              <div className="w-full h-2 rounded-full">
                 <div
                   className="h-2 bg-coffee rounded-full"
                   style={{
@@ -59,7 +59,7 @@ export function BarChart({
                 key={index}
                 className="h-full flex-1 flex flex-col items-center"
               >
-                <div className="w-full bg-gray-200 h-full flex flex-col justify-end">
+                <div className="w-full  h-full flex flex-col justify-end">
                   <div
                     className="w-full bg-coffee"
                     style={{

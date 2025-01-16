@@ -224,49 +224,52 @@ function ConnectionGraph({ data, selectedYear }: ConnectionGraphProps) {
     const legend = svg
       .append("g")
       .attr("class", "legend")
-      .attr("transform", "translate(20, 20)"); // Position in top-left
+      .attr("transform", "translate(30, 30)");
+
+    legend
+      .insert("rect", ":first-child")
+      .attr("width", 120)
+      .attr("height", 65)
+      .attr("x", -10)
+      .attr("y", -10)
+      .style("fill", "white")
+      .style("opacity", 0.95)
+      .style("filter", "drop-shadow(0px 2px 4px rgba(0,0,0,0.1))")
+      .attr("rx", 8);
 
     legend
       .append("circle")
       .attr("r", 6)
-      .attr("cx", 6)
-      .attr("cy", 6)
+      .attr("cx", 8)
+      .attr("cy", 10)
       .style("fill", "rgb(75, 57, 48)");
 
     legend
       .append("text")
-      .attr("x", 20)
-      .attr("y", 10)
+      .attr("x", 24)
+      .attr("y", 15)
       .text("Artist")
-      .style("font-size", "12px")
+      .style("font-size", "16px")
+      .style("font-weight", "500")
       .style("fill", "#4b3930");
 
     legend
       .append("rect")
       .attr("width", 12)
       .attr("height", 12)
-      .attr("x", 0)
-      .attr("y", 20)
+      .attr("x", 2)
+      .attr("y", 30)
       .style("fill", "rgb(245, 237, 220)")
       .style("stroke", "#4b3930");
 
     legend
       .append("text")
-      .attr("x", 20)
-      .attr("y", 30)
+      .attr("x", 24)
+      .attr("y", 40)
       .text("Exhibition")
-      .style("font-size", "12px")
+      .style("font-size", "16px")
+      .style("font-weight", "500")
       .style("fill", "#4b3930");
-
-    legend
-      .insert("rect", ":first-child")
-      .attr("width", 85)
-      .attr("height", 45)
-      .attr("x", -5)
-      .attr("y", -5)
-      .style("fill", "white")
-      .style("opacity", 0.8)
-      .attr("rx", 5);
 
     return () => {
       simulation.stop();
