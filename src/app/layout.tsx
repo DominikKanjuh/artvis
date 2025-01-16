@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Lora } from "next/font/google";
+
 import "./globals.css";
+import { Providers } from "./providers";
 
 const lora = Lora({ subsets: ["latin"] });
 
@@ -16,7 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${lora.className}`}>{children}</body>
+      <body className={`${lora.className}`}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
