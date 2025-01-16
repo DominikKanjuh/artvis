@@ -1,5 +1,3 @@
-import fs from "fs";
-import path from "path";
 import Papa from "papaparse";
 
 export type Exhibition = {
@@ -107,11 +105,13 @@ const getCountryName = (country: string): string => {
   return countryMap[country] || countryMap.default;
 };
 
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+
 export async function loadAndProcessData(): Promise<ProcessedData> {
   if (processedData) return processedData;
 
-  const filePath = path.join(process.cwd(), "public", "data", "artvis.csv");
-  const fileContent = fs.readFileSync(filePath, "utf-8");
+  const response = await fetch(`${baseUrl}/data/artvis.csv`);
+  const fileContent = await response.text();
 
   const { data: records } = Papa.parse(fileContent, {
     header: true,

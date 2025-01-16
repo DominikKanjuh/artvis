@@ -8,7 +8,16 @@ export async function GET() {
     const data = await loadAndProcessData();
     return NextResponse.json(data);
   } catch (error) {
-    console.error("Error loading data:", error);
-    return NextResponse.json({ error: "Failed to load data" }, { status: 500 });
+    if (error instanceof Error) {
+      return NextResponse.json(
+        { error: "Failed to load data", details: error.message },
+        { status: 500 }
+      );
+    } else {
+      return NextResponse.json(
+        { error: "Failed to load data", details: "Unknown error" },
+        { status: 500 }
+      );
+    }
   }
 }
