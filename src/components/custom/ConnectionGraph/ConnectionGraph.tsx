@@ -210,6 +210,53 @@ function ConnectionGraph({ data, selectedYear }: ConnectionGraphProps) {
       event.subject.fy = null;
     }
 
+    const legend = svg
+      .append("g")
+      .attr("class", "legend")
+      .attr("transform", "translate(20, 20)"); // Position in top-left
+
+    legend
+      .append("circle")
+      .attr("r", 6)
+      .attr("cx", 6)
+      .attr("cy", 6)
+      .style("fill", "rgb(75, 57, 48)");
+
+    legend
+      .append("text")
+      .attr("x", 20)
+      .attr("y", 10)
+      .text("Artist")
+      .style("font-size", "12px")
+      .style("fill", "#4b3930");
+
+    legend
+      .append("rect")
+      .attr("width", 12)
+      .attr("height", 12)
+      .attr("x", 0)
+      .attr("y", 20)
+      .style("fill", "rgb(245, 237, 220)")
+      .style("stroke", "#4b3930");
+
+    legend
+      .append("text")
+      .attr("x", 20)
+      .attr("y", 30)
+      .text("Exhibition")
+      .style("font-size", "12px")
+      .style("fill", "#4b3930");
+
+    legend
+      .insert("rect", ":first-child")
+      .attr("width", 85)
+      .attr("height", 45)
+      .attr("x", -5)
+      .attr("y", -5)
+      .style("fill", "white")
+      .style("opacity", 0.8)
+      .attr("rx", 5);
+
     return () => {
       simulation.stop();
       tooltip.remove();
