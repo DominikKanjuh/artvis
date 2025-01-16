@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import { ProcessedData } from "lib/data";
 
@@ -33,9 +33,20 @@ interface Link {
 
 function ConnectionGraph({ data, selectedYear }: ConnectionGraphProps) {
   const svgRef = useRef<SVGSVGElement>(null);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Set initial dimensions
+  useEffect(() => {
+    if (containerRef.current) {
+      const { width, height } = containerRef.current.getBoundingClientRect();
+      setDimensions({ width, height });
+    }
+  }, []);
 
   useEffect(() => {
-    if (!svgRef.current) return;
+    if (!svgRef.current || dimensions.width === 0 || dimensions.height === 0)
+      return;
 
     const exhibitions = data.exhibitions.filter((e) => e.year === selectedYear);
     const exhibitionIds = new Set(exhibitions.map((e) => e.exhibitionId));
@@ -76,9 +87,6 @@ function ConnectionGraph({ data, selectedYear }: ConnectionGraphProps) {
 
     d3.select(svgRef.current).selectAll("*").remove();
 
-    const width = svgRef.current.clientWidth;
-    const height = svgRef.current.clientHeight;
-
     const svg = d3.select(svgRef.current);
     const g = svg.append("g");
 
@@ -93,9 +101,9 @@ function ConnectionGraph({ data, selectedYear }: ConnectionGraphProps) {
     svg.call(
       zoom.transform as any,
       d3.zoomIdentity
-        .translate(width / 2, height / 2)
+        .translate(dimensions.width / 2, dimensions.height / 2)
         .scale(0.2)
-        .translate(-width / 2, -height / 2)
+        .translate(-dimensions.width / 2, -dimensions.height / 2)
     );
 
     const simulation = d3
@@ -108,7 +116,10 @@ function ConnectionGraph({ data, selectedYear }: ConnectionGraphProps) {
           .distance(100)
       )
       .force("charge", d3.forceManyBody().strength(-200))
-      .force("center", d3.forceCenter(width / 2, height / 2));
+      .force(
+        "center",
+        d3.forceCenter(dimensions.width / 2, dimensions.height / 2)
+      );
 
     const tooltip = d3
       .select("body")
@@ -261,14 +272,19 @@ function ConnectionGraph({ data, selectedYear }: ConnectionGraphProps) {
       simulation.stop();
       tooltip.remove();
     };
-  }, [data, selectedYear]);
+  }, [data, selectedYear, dimensions]);
 
   return (
-    <svg
-      ref={svgRef}
-      className="w-full h-full"
-      style={{ minHeight: "500px" }}
-    />
+    <div ref={containerRef} className="w-full h-full">
+      {dimensions.width > 0 && dimensions.height > 0 && (
+        <svg
+          ref={svgRef}
+          width={dimensions.width}
+          height={dimensions.height}
+          style={{ display: "block" }}
+        />
+      )}
+    </div>
   );
 }
 
