@@ -41,6 +41,72 @@ export type ProcessedData = {
 
 let processedData: ProcessedData | null = null;
 
+function getContinent(country: string): string {
+  const continentMap: Record<string, string> = {
+    // Europe
+    GB: "Europe", // United Kingdom
+    NL: "Europe", // Netherlands
+    DE: "Europe", // Germany
+    RU: "Europe", // Russia
+    UA: "Europe", // Ukraine
+    CH: "Europe", // Switzerland
+    HU: "Europe", // Hungary
+    AT: "Europe", // Austria
+    LV: "Europe", // Latvia
+    FR: "Europe", // France
+    BE: "Europe", // Belgium
+    CZ: "Europe", // Czech Republic
+    IT: "Europe", // Italy
+    LT: "Europe", // Lithuania
+    ES: "Europe", // Spain
+    SE: "Europe", // Sweden
+    PL: "Europe", // Poland
+    NO: "Europe", // Norway
+
+    // Asia
+    JP: "Asia", // Japan
+
+    // North America
+    US: "North America", // United States
+
+    // Unknown
+    "\\N": "Unknown",
+
+    default: "Europe",
+  };
+
+  return continentMap[country] || continentMap.default;
+}
+
+const getCountryName = (country: string): string => {
+  const countryMap: Record<string, string> = {
+    GB: "United Kingdom",
+    NL: "Netherlands",
+    DE: "Germany",
+    RU: "Russia",
+    UA: "Ukraine",
+    CH: "Switzerland",
+    HU: "Hungary",
+    AT: "Austria",
+    LV: "Latvia",
+    FR: "France",
+    BE: "Belgium",
+    CZ: "Czech Republic",
+    IT: "Italy",
+    LT: "Lithuania",
+    ES: "Spain",
+    SE: "Sweden",
+    PL: "Poland",
+    NO: "Norway",
+    JP: "Japan",
+    US: "United States",
+    "\\N": "Unknown",
+    default: "Unknown",
+  };
+
+  return countryMap[country] || countryMap.default;
+};
+
 export async function loadAndProcessData(): Promise<ProcessedData> {
   if (processedData) return processedData;
 
@@ -53,24 +119,29 @@ export async function loadAndProcessData(): Promise<ProcessedData> {
     transformHeader: (header) => header.trim(),
   });
 
+  const uniqueCountries = new Set<string>();
+
+  records.forEach((record: any) => {
+    if (record["e.country"]) {
+      uniqueCountries.add(record["e.country"]);
+    }
+  });
+
   const exhibitions = new Map<string, Exhibition>();
   const artists = new Map<string, Artist>();
   const connectionsSet = new Set<string>();
   const connections: ArtistExhibition[] = [];
 
   records.forEach((record: any) => {
-    if (!record["e.id"] || !record["a.id"]) {
-      console.log("record", record);
-    }
-
     if (!exhibitions.has(record["e.id"])) {
+      const countryCode = record["e.country"];
       exhibitions.set(record["e.id"], {
         exhibitionId: record["e.id"],
         title: record["e.title"],
         year: parseInt(record["e.startdate"]),
         city: record["e.city"],
-        country: record["e.country"],
-        continent: "", // To be added later
+        country: getCountryName(countryCode),
+        continent: getContinent(countryCode),
         venue: record["e.venue"],
         type: record["e.type"] as Exhibition["type"],
         numberOfPaintings: parseInt(record["e.paintings"]),
