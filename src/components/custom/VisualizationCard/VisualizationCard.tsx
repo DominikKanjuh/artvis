@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Link } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { forwardRef } from "react";
 
 const VisualizationCard = motion.create(
