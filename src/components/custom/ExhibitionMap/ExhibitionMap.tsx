@@ -42,7 +42,7 @@ function ExhibitionMap({ data, selectedYear }: ExhibitionMapProps) {
       />
 
       {/* Legend */}
-      <div className="absolute top-4 right-4 bg-white p-2 rounded shadow z-[1000] opacity-80">
+      <div className="absolute top-4 right-4 bg-white p-2 rounded shadow z-[900] opacity-80">
         <div className="text-sm font-semibold mb-1">Exhibition Types:</div>
         <div className="flex flex-col gap-1">
           <div className="flex items-center gap-2">

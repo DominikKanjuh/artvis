@@ -13,7 +13,7 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="bg-cream shadow-md">
+    <header className="bg-cream shadow-md relative">
       <nav className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center gap-8">
           <Link href="/" className="text-4xl font-bold text-coffee shrink-0">
@@ -46,20 +46,22 @@ function Header() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <ul className="md:hidden mt-4 space-y-4">
-            {navItems.map((item) => (
-              <li key={item.name} className="text-right">
-                <Link
-                  href={item.href}
-                  className="block text-coffee font-semibold py-2 transition-all relative group active:text-brown"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <span className="relative z-10">{item.name}</span>
-                  <span className="absolute inset-0 bg-latte transform scale-x-0 origin-right transition-transform group-hover:scale-x-100 group-active:scale-x-100" />
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <div className="absolute z-[1000] top-full left-0 right-0 bg-cream shadow-md md:hidden">
+            <ul className="container mx-auto px-4 py-2 space-y-4">
+              {navItems.map((item) => (
+                <li key={item.name} className="text-right">
+                  <Link
+                    href={item.href}
+                    className="block text-coffee font-semibold py-2 transition-all relative group active:text-brown"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <span className="relative z-10">{item.name}</span>
+                    <span className="absolute inset-0 bg-latte transform scale-x-0 origin-right transition-transform group-hover:scale-x-100 group-active:scale-x-100" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         )}
       </nav>
     </header>

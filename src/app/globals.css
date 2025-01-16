@@ -23,6 +23,11 @@ body {
   padding: 0;
 }
 
+.leaflet-top,
+.leaflet-bottom {
+  z-index: 999 !important;
+}
+
 @layer utilities {
   .bg-brown {
     background-color: var(--color-brown);
