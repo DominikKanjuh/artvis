@@ -55,6 +55,7 @@ export async function loadAndProcessData(): Promise<ProcessedData> {
 
   const exhibitions = new Map<string, Exhibition>();
   const artists = new Map<string, Artist>();
+  const connectionsSet = new Set<string>();
   const connections: ArtistExhibition[] = [];
 
   records.forEach((record: any) => {
@@ -105,10 +106,16 @@ export async function loadAndProcessData(): Promise<ProcessedData> {
       });
     }
 
-    connections.push({
-      artistId: record["a.id"],
-      exhibitionId: record["e.id"],
-    });
+    // Create a unique key for the connection
+    const connectionKey = `${record["a.id"]}-${record["e.id"]}`;
+
+    if (!connectionsSet.has(connectionKey)) {
+      connectionsSet.add(connectionKey);
+      connections.push({
+        artistId: record["a.id"],
+        exhibitionId: record["e.id"],
+      });
+    }
   });
 
   processedData = {

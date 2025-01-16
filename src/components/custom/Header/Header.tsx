@@ -16,9 +16,10 @@ function Header() {
             <li key={item.name}>
               <Link
                 href={item.href}
-                className="text-coffee hover:text-brown font-semibold transition-colors"
+                className="text-coffee hover:text-brown font-semibold transition-colors relative group"
               >
                 {item.name}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brown transition-all duration-300 group-hover:w-full" />
               </Link>
             </li>
           ))}
