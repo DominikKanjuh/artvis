@@ -18,34 +18,41 @@ import {
 } from "components/components/ui/popover";
 import { ProcessedData } from "lib/data";
 import { cn } from "lib/utils";
-import { BarChart } from "./BarChart";
-import { getCityData, getCountryData, getExhibitionData } from "./utils";
+import { BarChart } from "../GeographicHistograms/BarChart";
+import {
+  getGenderDistribution,
+  getLifespanDistribution,
+  getNationalityData,
+  prepareGenderData,
+} from "./utils";
 
-interface GeographicHistogramsProps {
+interface DemographicHistogramsProps {
   data: ProcessedData;
   selectedYear: number;
 }
 
-function GeographicHistograms({
+function DemographicHistograms({
   data,
   selectedYear,
-}: GeographicHistogramsProps) {
+}: DemographicHistogramsProps) {
   const [continent, setContinent] = useState("");
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
+  const [exhibition, setExhibition] = useState("");
 
   const [continentOpen, setContinentOpen] = useState(false);
   const [countryOpen, setCountryOpen] = useState(false);
   const [cityOpen, setCityOpen] = useState(false);
+  const [exhibitionOpen, setExhibitionOpen] = useState(false);
 
-  const yearData = useMemo(() => {
+  const exhibitionsByYear = useMemo(() => {
     return data.exhibitions.filter((e) => e.year === selectedYear);
-  }, [data?.exhibitions, selectedYear]);
+  }, [data.exhibitions, selectedYear]);
 
   const continents = useMemo(() => {
     const uniqueContinents = [
       ...new Set(
-        yearData
+        exhibitionsByYear
           .map((e) => e.continent)
           .filter((c) => c && c !== "-" && c !== "Unknown")
       ),
@@ -53,13 +60,13 @@ function GeographicHistograms({
     return uniqueContinents
       .map((c) => ({ value: c, label: c }))
       .sort((a, b) => a.label.localeCompare(b.label));
-  }, [yearData]);
+  }, [exhibitionsByYear]);
 
   const countries = useMemo(() => {
     const uniqueCountries = [
       ...new Set(
-        yearData
-          .filter((e) => e.continent === continent)
+        exhibitionsByYear
+          .filter((e) => !continent || e.continent === continent)
           .map((e) => e.country)
           .filter((c) => c && c !== "-" && c !== "Unknown")
       ),
@@ -67,14 +74,14 @@ function GeographicHistograms({
     return uniqueCountries
       .map((c) => ({ value: c, label: c }))
       .sort((a, b) => a.label.localeCompare(b.label));
-  }, [yearData, continent]);
+  }, [exhibitionsByYear, continent]);
 
   const cities = useMemo(() => {
     const uniqueCities = [
       ...new Set(
-        yearData
-          .filter((e) => e.continent === continent)
-          .filter((e) => e.country === country)
+        exhibitionsByYear
+          .filter((e) => !continent || e.continent === continent)
+          .filter((e) => !country || e.country === country)
           .map((e) => e.city)
           .filter((c) => c && c !== "-" && c !== "Unknown")
       ),
@@ -82,13 +89,58 @@ function GeographicHistograms({
     return uniqueCities
       .map((c) => ({ value: c, label: c }))
       .sort((a, b) => a.label.localeCompare(b.label));
-  }, [yearData, continent, country]);
+  }, [exhibitionsByYear, continent, country]);
+
+  const exhibitions = useMemo(() => {
+    const filteredExhibitions = exhibitionsByYear
+      .filter((e) => !continent || e.continent === continent)
+      .filter((e) => !country || e.country === country)
+      .filter((e) => !city || e.city === city);
+
+    return filteredExhibitions
+      .map((e) => ({ value: e.exhibitionId, label: e.title }))
+      .sort((a, b) => a.label.localeCompare(b.label));
+  }, [exhibitionsByYear, continent, country, city]);
+
+  const filteredArtists = useMemo(() => {
+    const noFiltersSelected = !continent && !country && !city && !exhibition;
+    if (noFiltersSelected) {
+      return [];
+    }
+
+    const finalExhibitions = exhibitionsByYear
+      .filter((e) => !continent || e.continent === continent)
+      .filter((e) => !country || e.country === country)
+      .filter((e) => !city || e.city === city)
+      .filter((e) => !exhibition || e.exhibitionId === exhibition);
+
+    const validExhibitionIds = new Set(
+      finalExhibitions.map((e) => e.exhibitionId)
+    );
+    const finalConnections = data.connections.filter((c) =>
+      validExhibitionIds.has(c.exhibitionId)
+    );
+    const validArtistIds = new Set(finalConnections.map((c) => c.artistId));
+
+    return data.artists.filter((artist) => validArtistIds.has(artist.artistId));
+  }, [
+    exhibitionsByYear,
+    continent,
+    country,
+    city,
+    exhibition,
+    data.connections,
+    data.artists,
+  ]);
+
+  console.log(filteredArtists);
 
   return (
-    <div className="h-full flex flex-col">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-2">
+    <div className="h-full flex flex-col overflow-hidden">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-2">
+        {/* Continent */}
         <div>
-          <h3 className="text-lg font-semibold mb-2">Exhibitions by Country</h3>
+          <h3 className="text-lg font-semibold mb-2">Filter by Continent</h3>
           <Popover open={continentOpen} onOpenChange={setContinentOpen}>
             <PopoverTrigger asChild>
               <Button
@@ -112,11 +164,12 @@ function GeographicHistograms({
                         key={item.value}
                         value={item.value}
                         onSelect={(currentValue) => {
-                          setContinent(
-                            currentValue === continent ? "" : currentValue
+                          setContinent((prev) =>
+                            prev === currentValue ? "" : currentValue
                           );
                           setCountry("");
                           setCity("");
+                          setExhibition("");
                           setContinentOpen(false);
                         }}
                       >
@@ -138,8 +191,9 @@ function GeographicHistograms({
           </Popover>
         </div>
 
+        {/* Country */}
         <div>
-          <h3 className="text-lg font-semibold mb-2">Exhibitions by City</h3>
+          <h3 className="text-lg font-semibold mb-2">Filter by Country</h3>
           <Popover open={countryOpen} onOpenChange={setCountryOpen}>
             <PopoverTrigger asChild>
               <Button
@@ -164,10 +218,11 @@ function GeographicHistograms({
                         key={item.value}
                         value={item.value}
                         onSelect={(currentValue) => {
-                          setCountry(
-                            currentValue === country ? "" : currentValue
+                          setCountry((prev) =>
+                            prev === currentValue ? "" : currentValue
                           );
                           setCity("");
+                          setExhibition("");
                           setCountryOpen(false);
                         }}
                       >
@@ -187,8 +242,9 @@ function GeographicHistograms({
           </Popover>
         </div>
 
+        {/* City */}
         <div>
-          <h3 className="text-lg font-semibold mb-2">Exhibitions</h3>
+          <h3 className="text-lg font-semibold mb-2">Filter by City</h3>
           <Popover open={cityOpen} onOpenChange={setCityOpen}>
             <PopoverTrigger asChild>
               <Button
@@ -213,7 +269,10 @@ function GeographicHistograms({
                         key={item.value}
                         value={item.value}
                         onSelect={(currentValue) => {
-                          setCity(currentValue === city ? "" : currentValue);
+                          setCity((prev) =>
+                            prev === currentValue ? "" : currentValue
+                          );
+                          setExhibition("");
                           setCityOpen(false);
                         }}
                       >
@@ -232,15 +291,74 @@ function GeographicHistograms({
             </PopoverContent>
           </Popover>
         </div>
+
+        {/* Exhibition */}
+        <div>
+          <h3 className="text-lg font-semibold mb-2">Filter by Exhibition</h3>
+          <Popover open={exhibitionOpen} onOpenChange={setExhibitionOpen}>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                role="combobox"
+                aria-expanded={exhibitionOpen}
+                className="w-[200px] justify-between"
+                disabled={!city}
+              >
+                {exhibition || "Select exhibition..."}
+                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-[200px] p-0">
+              <Command>
+                <CommandInput placeholder="Search exhibition..." />
+                <CommandList>
+                  <CommandEmpty>No exhibition found.</CommandEmpty>
+                  <CommandGroup>
+                    {exhibitions.map((item) => (
+                      <CommandItem
+                        key={item.value}
+                        value={item.value}
+                        onSelect={(currentValue) => {
+                          setExhibition((prev) =>
+                            prev === currentValue ? "" : currentValue
+                          );
+                          setExhibitionOpen(false);
+                        }}
+                      >
+                        <Check
+                          className={cn(
+                            "mr-2 h-4 w-4",
+                            exhibition === item.value
+                              ? "opacity-100"
+                              : "opacity-0"
+                          )}
+                        />
+                        {item.label}
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                </CommandList>
+              </Command>
+            </PopoverContent>
+          </Popover>
+        </div>
       </div>
 
-      <div className="h-full flex-1 grid grid-cols-1 md:grid-cols-3 gap-4">
-        <BarChart data={getCountryData(yearData, continent)} />
-        <BarChart data={getCityData(yearData, country)} />
-        <BarChart data={getExhibitionData(yearData, city)} />
+      {/* Bar Charts */}
+      <div className="h-full flex-1 grid grid-cols-1 md:grid-cols-3 gap-4 overflow-hidden">
+        <BarChart data={getNationalityData(filteredArtists)} />
+        <BarChart
+          data={getGenderDistribution(filteredArtists)}
+          horizontal={false}
+          customColors={{
+            Male: "rgb(75, 57, 48)",
+            Female: "rgb(245, 237, 220)",
+          }}
+        />
+        <BarChart data={getLifespanDistribution(filteredArtists)} />
       </div>
     </div>
   );
 }
 
-export default GeographicHistograms;
+export default DemographicHistograms;

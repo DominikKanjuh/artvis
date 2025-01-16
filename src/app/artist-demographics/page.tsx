@@ -1,11 +1,10 @@
 "use client";
 
-import { Header, Timeline, GeographicHistograms } from "components/custom";
-
+import { Header, Timeline, DemographicHistograms } from "components/custom";
 import { useData } from "hooks/useData";
 import { useState } from "react";
 
-export default function GeographicTrends() {
+export default function Demographics() {
   const [selectedYear, setSelectedYear] = useState(1905);
   const { data, isLoading, error } = useData();
 
@@ -21,13 +20,13 @@ export default function GeographicTrends() {
       <Header />
       <main className="flex-1 container mx-auto px-4 py-4 flex flex-col">
         <div className="flex gap-4 w-full justify-between items-center mb-4">
-          <h1 className="text-3xl font-bold text-left text-coffee">
-            Geographic Exhibition Trends
+          <h1 className="text-3xl font-bold text-left lg:text-center text-coffee">
+            Artist Demographics
           </h1>
           <Timeline onYearChange={handleYearChange} />
         </div>
         <div className="flex-1 bg-cream rounded-lg shadow-md p-4">
-          <GeographicHistograms data={data} selectedYear={selectedYear} />
+          <DemographicHistograms data={data} selectedYear={selectedYear} />
         </div>
       </main>
     </div>
