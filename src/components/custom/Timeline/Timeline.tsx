@@ -27,7 +27,7 @@ function Timeline({ onYearChange }: TimelineProps) {
         step={1}
         value={[year]}
         onValueChange={handleYearChange}
-        className="w-full"
+        className="w-full [&_[data-orientation=horizontal].bg-primary]:bg-coffee"
       />
       <p className="text-center text-lg font-semibold text-coffee mt-4">
         Selected Year: {year}
