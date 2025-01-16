@@ -90,6 +90,13 @@ function ConnectionGraph({ data, selectedYear }: ConnectionGraphProps) {
       });
 
     svg.call(zoom as any);
+    svg.call(
+      zoom.transform as any,
+      d3.zoomIdentity
+        .translate(width / 2, height / 2)
+        .scale(0.2)
+        .translate(-width / 2, -height / 2)
+    );
 
     const simulation = d3
       .forceSimulation(nodes as any)
