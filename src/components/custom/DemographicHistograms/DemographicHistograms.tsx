@@ -23,7 +23,6 @@ import {
   getGenderDistribution,
   getLifespanDistribution,
   getNationalityData,
-  prepareGenderData,
 } from "./utils";
 
 interface DemographicHistogramsProps {
@@ -132,8 +131,6 @@ function DemographicHistograms({
     data.connections,
     data.artists,
   ]);
-
-  console.log(filteredArtists);
 
   return (
     <div className="h-full flex flex-col overflow-hidden">
