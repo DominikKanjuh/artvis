@@ -38,3 +38,24 @@ export default function ArtistConnections() {
     </div>
   );
 }
+
+export const metadata = {
+  title: "ArtVis - Artist-Exhibition Connections",
+  description:
+    "Trace the intricate web of artists and their legendary exhibitions through time",
+  openGraph: {
+    type: "website",
+    url: "https://artvis.pages.dev/artist-connections",
+    title: "Threads of Genius: Artist-Exhibition Connections",
+    description:
+      "Trace the intricate web of artists and their legendary exhibitions through time",
+    images: ["https://images.metmuseum.org/CRDImages/ep/original/DT1947.jpg"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Threads of Genius: Artist-Exhibition Connections",
+    description:
+      "Trace the intricate web of artists and their legendary exhibitions through time",
+    images: ["https://images.metmuseum.org/CRDImages/ep/original/DT1947.jpg"],
+  },
+};

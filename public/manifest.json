@@ -1,0 +1,10 @@
+{
+  "name": "ArtVis - Insight into Art",
+  "short_name": "ArtVis",
+  "description": "Explore art history through interactive visualizations and data-driven insights for museum curators and art enthusiasts",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFBF5",
+  "theme_color": "#2C1810",
+  "categories": ["education", "art", "visualization"]
+}

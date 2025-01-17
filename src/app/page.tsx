@@ -38,7 +38,7 @@ export default function LandingPage() {
   });
 
   const [scrollTimeout, setScrollTimeout] = useState<NodeJS.Timeout | null>(
-    null,
+    null
   );
   const [isManualScrolling, setIsManualScrolling] = useState(false);
 
@@ -88,6 +88,23 @@ export default function LandingPage() {
     connectionsInView,
     isManualScrolling,
   ]);
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "ArtVis",
+    description:
+      "Explore art history through interactive visualizations and data-driven insights",
+    applicationCategory: "Visualization Application",
+    audience: {
+      "@type": "Audience",
+      audienceType: ["Museum Curators", "Art Historians", "Art Enthusiasts"],
+    },
+    educationalUse: ["Data Visualization", "Research", "Analysis"],
+    keywords:
+      "art history, museum exhibitions, artist demographics, data visualization",
+    isAccessibleForFree: true,
+  };
 
   return (
     <>
@@ -156,6 +173,32 @@ export default function LandingPage() {
 
         <Footer />
       </div>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
     </>
   );
 }
+
+export const metadata = {
+  title: "ArtVis",
+  description:
+    "Explore art history through interactive visualizations and data-driven insights",
+  openGraph: {
+    type: "website",
+    url: "https://artvis.pages.dev",
+    title: "ArtVis - Insight into Art",
+    description:
+      "Explore art history through interactive visualizations and data-driven insights",
+    images: ["https://images.metmuseum.org/CRDImages/ep/original/DT1567.jpg"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ArtVis - Insight into Art",
+    description:
+      "Explore art history through interactive visualizations and data-driven insights",
+    images: ["https://images.metmuseum.org/CRDImages/ep/original/DT1567.jpg"],
+  },
+};

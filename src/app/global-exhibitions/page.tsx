@@ -39,3 +39,24 @@ export default function GlobalExhibitions() {
     </div>
   );
 }
+
+export const metadata = {
+  title: "ArtVis - Global Exhibitions Map",
+  description:
+    "Explore the world's most celebrated exhibitions and uncover their hidden artistic gems",
+  openGraph: {
+    type: "website",
+    url: "https://artvis.pages.dev/global-exhibitions",
+    title: "Art Unveiled: Global Exhibitions Map",
+    description:
+      "Explore the world's most celebrated exhibitions and uncover their hidden artistic gems",
+    images: ["https://images.metmuseum.org/CRDImages/ep/original/DT1567.jpg"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Art Unveiled: Global Exhibitions Map",
+    description:
+      "Explore the world's most celebrated exhibitions and uncover their hidden artistic gems",
+    images: ["https://images.metmuseum.org/CRDImages/ep/original/DT1567.jpg"],
+  },
+};

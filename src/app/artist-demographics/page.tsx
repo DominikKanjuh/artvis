@@ -32,3 +32,28 @@ export default function Demographics() {
     </div>
   );
 }
+
+export const metadata = {
+  title: "ArtVis - Artist Demographics",
+  description:
+    "Discover the lifelines, identities and origins of the artists who shaped history",
+  openGraph: {
+    type: "website",
+    url: "https://artvis.pages.dev/artist-demographics",
+    title: "The Artist's Mosaic: Demographics Revealed",
+    description:
+      "Discover the lifelines, identities and origins of the artists who shaped history",
+    images: [
+      "https://images.metmuseum.org/CRDImages/ep/original/DP-1410-001.jpg",
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Artist's Mosaic: Demographics Revealed",
+    description:
+      "Discover the lifelines, identities and origins of the artists who shaped history",
+    images: [
+      "https://images.metmuseum.org/CRDImages/ep/original/DP-1410-001.jpg",
+    ],
+  },
+};

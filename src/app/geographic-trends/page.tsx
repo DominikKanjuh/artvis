@@ -33,3 +33,24 @@ export default function GeographicTrends() {
     </div>
   );
 }
+
+export const metadata = {
+  title: "ArtVis - Geographic Exhibition Trends",
+  description:
+    "Journey through the art capitals of the world, from continents to cities and see where masterpieces come alive",
+  openGraph: {
+    type: "website",
+    url: "https://artvis.pages.dev/geographic-trends",
+    title: "Chronicles of Creativity: Geographic Trends",
+    description:
+      "Journey through the art capitals of the world, from continents to cities and see where masterpieces come alive",
+    images: ["https://images.metmuseum.org/CRDImages/ep/original/DP346474.jpg"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Chronicles of Creativity: Geographic Trends",
+    description:
+      "Journey through the art capitals of the world, from continents to cities and see where masterpieces come alive",
+    images: ["https://images.metmuseum.org/CRDImages/ep/original/DP346474.jpg"],
+  },
+};
