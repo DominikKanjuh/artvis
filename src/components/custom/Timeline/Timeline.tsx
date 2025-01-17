@@ -18,7 +18,7 @@ function Timeline({ onYearChange }: TimelineProps) {
 
   return (
     <div className="w-full max-w-xl p-4 bg-cream rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold text-coffee mb-4">
+      <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-coffee mb-4">
         Timeline: 1905-1915
       </h2>
       <Slider
@@ -29,7 +29,7 @@ function Timeline({ onYearChange }: TimelineProps) {
         onValueChange={handleYearChange}
         className="w-full [&_[data-orientation=horizontal].bg-primary]:bg-coffee"
       />
-      <p className="text-center text-lg font-semibold text-coffee mt-4">
+      <p className="text-left sm:text-center text-lg font-semibold text-coffee mt-4">
         Selected Year: {year}
       </p>
     </div>

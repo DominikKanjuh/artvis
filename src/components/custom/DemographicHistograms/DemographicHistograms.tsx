@@ -134,7 +134,7 @@ function DemographicHistograms({
 
   return (
     <div className="h-full flex flex-col overflow-hidden">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-2">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
         {/* Continent */}
         <div>
           <h3 className="text-lg font-semibold mb-2">Filter by Continent</h3>

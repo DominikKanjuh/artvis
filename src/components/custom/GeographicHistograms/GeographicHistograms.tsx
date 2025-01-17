@@ -86,7 +86,7 @@ function GeographicHistograms({
 
   return (
     <div className="h-full flex flex-col">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-2">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
         <div>
           <h3 className="text-lg font-semibold mb-2">Exhibitions by Country</h3>
           <Popover open={continentOpen} onOpenChange={setContinentOpen}>

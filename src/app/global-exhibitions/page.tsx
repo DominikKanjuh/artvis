@@ -27,7 +27,7 @@ export default function GlobalExhibitions() {
       <Header />
       <main className="flex-1 container mx-auto px-4 py-4 flex flex-col">
         <div className="flex gap-4 w-full justify-between items-center mb-4">
-          <h1 className="text-3xl font-bold text-left lg:text-center text-coffee">
+          <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-left lg:text-center text-coffee">
             Global Exhibitions Map
           </h1>
           <Timeline onYearChange={handleYearChange} />

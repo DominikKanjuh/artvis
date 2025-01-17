@@ -16,6 +16,18 @@ export function BarChart({
   const maxValue = Math.max(...data.map((d) => d.value), 1);
   const [maxHeight, setMaxHeight] = useState<number | null>(null);
   const chartRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     if (chartRef.current && !maxHeight) {
@@ -27,7 +39,9 @@ export function BarChart({
   return (
     <div
       className="h-full space-y-2 p-4 overflow-y-auto bg-white rounded-lg shadow"
-      style={{ maxHeight: maxHeight ? `${maxHeight}px` : undefined }}
+      style={{
+        maxHeight: !isMobile && maxHeight ? `${maxHeight}px` : undefined,
+      }}
       ref={chartRef}
     >
       {horizontal ? (
