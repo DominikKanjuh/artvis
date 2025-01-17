@@ -149,7 +149,7 @@ function ConnectionGraph({ data, selectedYear }: ConnectionGraphProps) {
           .on("drag", dragged)
           .on("end", dragended) as any
       )
-      .on("click", (event, d: Node) => {
+      .on("mouseover", (event, d: Node) => {
         const details = d.details;
         let content = `<div class="font-bold">${d.name}</div>`;
 
