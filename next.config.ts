@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
   images: {
     domains: ["images.metmuseum.org"],
   },
+  output: "standalone",
 };
 
 export default nextConfig;
