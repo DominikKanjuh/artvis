@@ -135,6 +135,8 @@ export async function loadAndProcessData(): Promise<ProcessedData> {
   records.forEach((record: any) => {
     if (!exhibitions.has(record["e.id"])) {
       const countryCode = record["e.country"];
+      const jitter = (value: number) => value + (Math.random() - 0.5) * 0.01;
+
       exhibitions.set(record["e.id"], {
         exhibitionId: record["e.id"],
         title: record["e.title"],
@@ -145,8 +147,8 @@ export async function loadAndProcessData(): Promise<ProcessedData> {
         venue: record["e.venue"],
         type: record["e.type"] as Exhibition["type"],
         numberOfPaintings: parseInt(record["e.paintings"]),
-        latitude: parseFloat(record["e.latitude"]),
-        longitude: parseFloat(record["e.longitude"]),
+        latitude: jitter(parseFloat(record["e.latitude"])),
+        longitude: jitter(parseFloat(record["e.longitude"])),
         startDate: record["e.startdate"],
       });
     }
