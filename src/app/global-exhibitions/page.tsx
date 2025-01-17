@@ -22,44 +22,6 @@ export default function GlobalExhibitions() {
   if (error || !data) return <div>Error: {error?.message}</div>;
 
   return (
-    <>
-      <head>
-        <title>ArtVis - Global Exhibitions Map</title>
-        <meta
-          name="description"
-          content="Explore the world's most celebrated exhibitions and uncover their hidden artistic gems"
-        />
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:url"
-          content="https://artvis.pages.dev/global-exhibitions"
-        />
-        <meta
-          property="og:title"
-          content="Art Unveiled: Global Exhibitions Map"
-        />
-        <meta
-          property="og:description"
-          content="Explore the world's most celebrated exhibitions and uncover their hidden artistic gems"
-        />
-        <meta
-          property="og:image"
-          content="https://images.metmuseum.org/CRDImages/ep/original/DT1567.jpg"
-        />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content="Art Unveiled: Global Exhibitions Map"
-        />
-        <meta
-          name="twitter:description"
-          content="Explore the world's most celebrated exhibitions and uncover their hidden artistic gems"
-        />
-        <meta
-          name="twitter:image"
-          content="https://images.metmuseum.org/CRDImages/ep/original/DT1567.jpg"
-        />
-      </head>
 
       <div className="h-screen bg-latte text-espresso font-serif flex flex-col">
         <Header />
@@ -75,6 +37,6 @@ export default function GlobalExhibitions() {
           </div>
         </main>
       </div>
-    </>
+
   );
 }

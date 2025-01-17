@@ -8,6 +8,24 @@ const lora = Lora({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://artvis.pages.dev"),
+  title: "ArtVis - Insight into Art",
+  description:
+    "Explore art history through interactive visualizations and data-driven insights",
+  openGraph: {
+    type: "website",
+    url: "https://artvis.pages.dev",
+    title: "ArtVis - Insight into Art",
+    description:
+      "Explore art history through interactive visualizations and data-driven insights",
+    images: ["https://images.metmuseum.org/CRDImages/ep/original/DT1567.jpg"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ArtVis - Insight into Art",
+    description:
+      "Explore art history through interactive visualizations and data-driven insights",
+    images: ["https://images.metmuseum.org/CRDImages/ep/original/DT1567.jpg"],
+  },
   authors: [
     { name: "Dominik Kanjuh" },
     { name: "Paul Nitzke" },

@@ -108,35 +108,6 @@ export default function LandingPage() {
 
   return (
     <>
-      <head>
-        <title>ArtVis</title>
-        <meta
-          name="description"
-          content="Explore art history through interactive visualizations and data-driven insights"
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://artvis.pages.dev" />
-        <meta property="og:title" content="ArtVis - Insight into Art" />
-        <meta
-          property="og:description"
-          content="Explore art history through interactive visualizations and data-driven insights"
-        />
-        <meta
-          property="og:image"
-          content="https://images.metmuseum.org/CRDImages/ep/original/DT1567.jpg"
-        />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="ArtVis - Insight into Art" />
-        <meta
-          name="twitter:description"
-          content="Explore art history through interactive visualizations and data-driven insights"
-        />
-        <meta
-          name="twitter:image"
-          content="https://images.metmuseum.org/CRDImages/ep/original/DT1567.jpg"
-        />
-      </head>
-
       {/* Progress bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-coffee z-50"
