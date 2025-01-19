@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 
 interface BarChartProps {
   data: { label: string; value: number }[];
@@ -52,14 +53,18 @@ export function BarChart({
                 <span>{item.label}</span>
                 <span>{item.value}</span>
               </div>
-              <div className="w-full h-2 rounded-full">
-                <div
-                  className="h-2 bg-coffee rounded-full"
+              <div className="w-full h-2 rounded-full bg-gray-200">
+                <motion.div
+                  className="h-2 rounded-full"
                   style={{
-                    width: `${(item.value / maxValue) * 100}%`,
                     backgroundColor:
                       customColors?.[item.label] || "rgb(75, 57, 48)",
                   }}
+                  initial={{ width: 0 }}
+                  animate={{
+                    width: `${(item.value / maxValue) * 100}%`,
+                  }}
+                  transition={{ duration: 0.6 }}
                 />
               </div>
             </div>
@@ -74,14 +79,18 @@ export function BarChart({
                 className="h-full flex-1 flex flex-col items-center"
               >
                 <div className="w-full  h-full flex flex-col justify-end">
-                  <div
-                    className="w-full bg-coffee"
+                  <motion.div
+                    className="w-full"
                     style={{
-                      height: `${(item.value / maxValue) * 100}%`,
                       minHeight: "10px",
                       backgroundColor:
                         customColors?.[item.label] || "rgb(75, 57, 48)",
                     }}
+                    initial={{ height: 0 }}
+                    animate={{
+                      height: `${(item.value / maxValue) * 100}%`,
+                    }}
+                    transition={{ duration: 0.6 }}
                   />
                 </div>
               </div>
