@@ -298,10 +298,13 @@ function DemographicHistograms({
                 variant="outline"
                 role="combobox"
                 aria-expanded={exhibitionOpen}
-                className="w-[200px] justify-between"
+                className="w-[200px] flex justify-between items-center overflow-hidden text-ellipsis whitespace-nowrap"
                 disabled={!city}
               >
-                {exhibition || "Select exhibition..."}
+                <span className="flex-1 overflow-hidden text-ellipsis">
+                  {exhibitions.find((e) => e.value === exhibition)?.label ||
+                    "Select exhibition..."}
+                </span>
                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
               </Button>
             </PopoverTrigger>
