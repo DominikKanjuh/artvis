@@ -17,7 +17,7 @@ function Timeline({ onYearChange }: TimelineProps) {
   };
 
   return (
-    <div className="w-full max-w-xl p-4 bg-cream rounded-lg shadow-md">
+    <div className="w-full max-h-[126px] max-w-xl p-4 bg-cream rounded-lg shadow-md">
       <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-coffee mb-4">
         Timeline: 1905-1915
       </h2>
