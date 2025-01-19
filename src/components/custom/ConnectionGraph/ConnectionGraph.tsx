@@ -51,7 +51,7 @@ function ConnectionGraph({ data, selectedYear }: ConnectionGraphProps) {
     const exhibitions = data.exhibitions.filter((e) => e.year === selectedYear);
     const exhibitionIds = new Set(exhibitions.map((e) => e.exhibitionId));
     const relevantConnections = data.connections.filter((c) =>
-      exhibitionIds.has(c.exhibitionId)
+      exhibitionIds.has(c.exhibitionId),
     );
     const artistIds = new Set(relevantConnections.map((c) => c.artistId));
     const artists = data.artists.filter((a) => artistIds.has(a.artistId));
@@ -103,7 +103,7 @@ function ConnectionGraph({ data, selectedYear }: ConnectionGraphProps) {
       d3.zoomIdentity
         .translate(dimensions.width / 2, dimensions.height / 2)
         .scale(0.2)
-        .translate(-dimensions.width / 2, -dimensions.height / 2)
+        .translate(-dimensions.width / 2, -dimensions.height / 2),
     );
 
     const simulation = d3
@@ -113,12 +113,12 @@ function ConnectionGraph({ data, selectedYear }: ConnectionGraphProps) {
         d3
           .forceLink(links)
           .id((d: any) => d.id)
-          .distance(100)
+          .distance(100),
       )
       .force("charge", d3.forceManyBody().strength(-200))
       .force(
         "center",
-        d3.forceCenter(dimensions.width / 2, dimensions.height / 2)
+        d3.forceCenter(dimensions.width / 2, dimensions.height / 2),
       );
 
     const tooltip = d3
@@ -126,7 +126,7 @@ function ConnectionGraph({ data, selectedYear }: ConnectionGraphProps) {
       .append("div")
       .attr(
         "class",
-        "absolute hidden bg-white p-2 rounded shadow-lg border border-gray-200 max-w-xs"
+        "absolute hidden bg-white p-2 rounded shadow-lg border border-gray-200 max-w-xs",
       );
 
     const link = g
@@ -147,7 +147,7 @@ function ConnectionGraph({ data, selectedYear }: ConnectionGraphProps) {
           .drag<any, any>()
           .on("start", dragstarted)
           .on("drag", dragged)
-          .on("end", dragended) as any
+          .on("end", dragended) as any,
       )
       .on("mouseover", (event, d: Node) => {
         const details = d.details;
@@ -159,8 +159,8 @@ function ConnectionGraph({ data, selectedYear }: ConnectionGraphProps) {
               <div>Gender: ${details?.gender}</div>
               <div>Nationality: ${details?.nationality}</div>
               <div>Lifespan: ${details?.birthYear} - ${
-            details?.deathYear || "Present"
-          }</div>
+                details?.deathYear || "Present"
+              }</div>
             </div>
           `;
         } else {
@@ -187,10 +187,10 @@ function ConnectionGraph({ data, selectedYear }: ConnectionGraphProps) {
       .attr("d", (d) =>
         d.type === "artist"
           ? d3.symbol().type(d3.symbolCircle).size(400)()
-          : `M-10,-10 L10,-10 L10,10 L-10,10 Z`
+          : `M-10,-10 L10,-10 L10,10 L-10,10 Z`,
       )
       .style("fill", (d) =>
-        d.type === "artist" ? "rgb(75, 57, 48)" : "rgb(245, 237, 220)"
+        d.type === "artist" ? "rgb(75, 57, 48)" : "rgb(245, 237, 220)",
       )
       .style("stroke", "#4b3930");
 
@@ -278,7 +278,7 @@ function ConnectionGraph({ data, selectedYear }: ConnectionGraphProps) {
   }, [data, selectedYear, dimensions]);
 
   return (
-    <div ref={containerRef} className="w-full h-full">
+    <div ref={containerRef} className="h-full w-full">
       {dimensions.width > 0 && dimensions.height > 0 && (
         <svg
           ref={svgRef}

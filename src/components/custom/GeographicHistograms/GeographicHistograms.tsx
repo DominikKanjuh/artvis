@@ -47,7 +47,7 @@ function GeographicHistograms({
       ...new Set(
         yearData
           .map((e) => e.continent)
-          .filter((c) => c && c !== "-" && c !== "Unknown")
+          .filter((c) => c && c !== "-" && c !== "Unknown"),
       ),
     ];
     return uniqueContinents
@@ -61,7 +61,7 @@ function GeographicHistograms({
         yearData
           .filter((e) => e.continent === continent)
           .map((e) => e.country)
-          .filter((c) => c && c !== "-" && c !== "Unknown")
+          .filter((c) => c && c !== "-" && c !== "Unknown"),
       ),
     ];
     return uniqueCountries
@@ -76,7 +76,7 @@ function GeographicHistograms({
           .filter((e) => e.continent === continent)
           .filter((e) => e.country === country)
           .map((e) => e.city)
-          .filter((c) => c && c !== "-" && c !== "Unknown")
+          .filter((c) => c && c !== "-" && c !== "Unknown"),
       ),
     ];
     return uniqueCities
@@ -85,10 +85,10 @@ function GeographicHistograms({
   }, [yearData, continent, country]);
 
   return (
-    <div className="h-full flex flex-col">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+    <div className="flex h-full flex-col">
+      <div className="mb-4 grid grid-cols-1 gap-4 md:grid-cols-3">
         <div>
-          <h3 className="text-lg font-semibold mb-2">Exhibitions by Country</h3>
+          <h3 className="mb-2 text-lg font-semibold">Exhibitions by Country</h3>
           <Popover open={continentOpen} onOpenChange={setContinentOpen}>
             <PopoverTrigger asChild>
               <Button
@@ -113,7 +113,7 @@ function GeographicHistograms({
                         value={item.value}
                         onSelect={(currentValue) => {
                           setContinent(
-                            currentValue === continent ? "" : currentValue
+                            currentValue === continent ? "" : currentValue,
                           );
                           setCountry("");
                           setCity("");
@@ -125,7 +125,7 @@ function GeographicHistograms({
                             "mr-2 h-4 w-4",
                             continent === item.value
                               ? "opacity-100"
-                              : "opacity-0"
+                              : "opacity-0",
                           )}
                         />
                         {item.label}
@@ -139,7 +139,7 @@ function GeographicHistograms({
         </div>
 
         <div>
-          <h3 className="text-lg font-semibold mb-2">Exhibitions by City</h3>
+          <h3 className="mb-2 text-lg font-semibold">Exhibitions by City</h3>
           <Popover open={countryOpen} onOpenChange={setCountryOpen}>
             <PopoverTrigger asChild>
               <Button
@@ -165,7 +165,7 @@ function GeographicHistograms({
                         value={item.value}
                         onSelect={(currentValue) => {
                           setCountry(
-                            currentValue === country ? "" : currentValue
+                            currentValue === country ? "" : currentValue,
                           );
                           setCity("");
                           setCountryOpen(false);
@@ -174,7 +174,9 @@ function GeographicHistograms({
                         <Check
                           className={cn(
                             "mr-2 h-4 w-4",
-                            country === item.value ? "opacity-100" : "opacity-0"
+                            country === item.value
+                              ? "opacity-100"
+                              : "opacity-0",
                           )}
                         />
                         {item.label}
@@ -188,7 +190,7 @@ function GeographicHistograms({
         </div>
 
         <div>
-          <h3 className="text-lg font-semibold mb-2">
+          <h3 className="mb-2 text-lg font-semibold">
             Paintings by Exhibition
           </h3>
           <Popover open={cityOpen} onOpenChange={setCityOpen}>
@@ -222,7 +224,7 @@ function GeographicHistograms({
                         <Check
                           className={cn(
                             "mr-2 h-4 w-4",
-                            city === item.value ? "opacity-100" : "opacity-0"
+                            city === item.value ? "opacity-100" : "opacity-0",
                           )}
                         />
                         {item.label}
@@ -236,7 +238,7 @@ function GeographicHistograms({
         </div>
       </div>
 
-      <div className="h-full flex-1 grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid h-full flex-1 grid-cols-1 gap-4 md:grid-cols-3">
         <BarChart data={getCountryData(yearData, continent)} />
         <BarChart data={getCityData(yearData, country)} />
         <BarChart data={getExhibitionData(yearData, city)} />

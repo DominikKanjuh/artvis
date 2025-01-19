@@ -53,7 +53,7 @@ function DemographicHistograms({
       ...new Set(
         exhibitionsByYear
           .map((e) => e.continent)
-          .filter((c) => c && c !== "-" && c !== "Unknown")
+          .filter((c) => c && c !== "-" && c !== "Unknown"),
       ),
     ];
     return uniqueContinents
@@ -67,7 +67,7 @@ function DemographicHistograms({
         exhibitionsByYear
           .filter((e) => !continent || e.continent === continent)
           .map((e) => e.country)
-          .filter((c) => c && c !== "-" && c !== "Unknown")
+          .filter((c) => c && c !== "-" && c !== "Unknown"),
       ),
     ];
     return uniqueCountries
@@ -82,7 +82,7 @@ function DemographicHistograms({
           .filter((e) => !continent || e.continent === continent)
           .filter((e) => !country || e.country === country)
           .map((e) => e.city)
-          .filter((c) => c && c !== "-" && c !== "Unknown")
+          .filter((c) => c && c !== "-" && c !== "Unknown"),
       ),
     ];
     return uniqueCities
@@ -114,10 +114,10 @@ function DemographicHistograms({
       .filter((e) => !exhibition || e.exhibitionId === exhibition);
 
     const validExhibitionIds = new Set(
-      finalExhibitions.map((e) => e.exhibitionId)
+      finalExhibitions.map((e) => e.exhibitionId),
     );
     const finalConnections = data.connections.filter((c) =>
-      validExhibitionIds.has(c.exhibitionId)
+      validExhibitionIds.has(c.exhibitionId),
     );
     const validArtistIds = new Set(finalConnections.map((c) => c.artistId));
 
@@ -133,11 +133,11 @@ function DemographicHistograms({
   ]);
 
   return (
-    <div className="h-full flex flex-col overflow-hidden">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+    <div className="flex h-full flex-col overflow-hidden">
+      <div className="mb-4 grid grid-cols-1 gap-4 md:grid-cols-4">
         {/* Continent */}
         <div>
-          <h3 className="text-lg font-semibold mb-2">Filter by Continent</h3>
+          <h3 className="mb-2 text-lg font-semibold">Filter by Continent</h3>
           <Popover open={continentOpen} onOpenChange={setContinentOpen}>
             <PopoverTrigger asChild>
               <Button
@@ -162,7 +162,7 @@ function DemographicHistograms({
                         value={item.value}
                         onSelect={(currentValue) => {
                           setContinent((prev) =>
-                            prev === currentValue ? "" : currentValue
+                            prev === currentValue ? "" : currentValue,
                           );
                           setCountry("");
                           setCity("");
@@ -175,7 +175,7 @@ function DemographicHistograms({
                             "mr-2 h-4 w-4",
                             continent === item.value
                               ? "opacity-100"
-                              : "opacity-0"
+                              : "opacity-0",
                           )}
                         />
                         {item.label}
@@ -190,7 +190,7 @@ function DemographicHistograms({
 
         {/* Country */}
         <div>
-          <h3 className="text-lg font-semibold mb-2">Filter by Country</h3>
+          <h3 className="mb-2 text-lg font-semibold">Filter by Country</h3>
           <Popover open={countryOpen} onOpenChange={setCountryOpen}>
             <PopoverTrigger asChild>
               <Button
@@ -216,7 +216,7 @@ function DemographicHistograms({
                         value={item.value}
                         onSelect={(currentValue) => {
                           setCountry((prev) =>
-                            prev === currentValue ? "" : currentValue
+                            prev === currentValue ? "" : currentValue,
                           );
                           setCity("");
                           setExhibition("");
@@ -226,7 +226,9 @@ function DemographicHistograms({
                         <Check
                           className={cn(
                             "mr-2 h-4 w-4",
-                            country === item.value ? "opacity-100" : "opacity-0"
+                            country === item.value
+                              ? "opacity-100"
+                              : "opacity-0",
                           )}
                         />
                         {item.label}
@@ -241,7 +243,7 @@ function DemographicHistograms({
 
         {/* City */}
         <div>
-          <h3 className="text-lg font-semibold mb-2">Filter by City</h3>
+          <h3 className="mb-2 text-lg font-semibold">Filter by City</h3>
           <Popover open={cityOpen} onOpenChange={setCityOpen}>
             <PopoverTrigger asChild>
               <Button
@@ -267,7 +269,7 @@ function DemographicHistograms({
                         value={item.value}
                         onSelect={(currentValue) => {
                           setCity((prev) =>
-                            prev === currentValue ? "" : currentValue
+                            prev === currentValue ? "" : currentValue,
                           );
                           setExhibition("");
                           setCityOpen(false);
@@ -276,7 +278,7 @@ function DemographicHistograms({
                         <Check
                           className={cn(
                             "mr-2 h-4 w-4",
-                            city === item.value ? "opacity-100" : "opacity-0"
+                            city === item.value ? "opacity-100" : "opacity-0",
                           )}
                         />
                         {item.label}
@@ -291,14 +293,14 @@ function DemographicHistograms({
 
         {/* Exhibition */}
         <div>
-          <h3 className="text-lg font-semibold mb-2">Filter by Exhibition</h3>
+          <h3 className="mb-2 text-lg font-semibold">Filter by Exhibition</h3>
           <Popover open={exhibitionOpen} onOpenChange={setExhibitionOpen}>
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
                 role="combobox"
                 aria-expanded={exhibitionOpen}
-                className="w-[200px] flex justify-between items-center overflow-hidden text-ellipsis whitespace-nowrap"
+                className="flex w-[200px] items-center justify-between overflow-hidden text-ellipsis whitespace-nowrap"
                 disabled={!city}
               >
                 <span className="flex-1 overflow-hidden text-ellipsis">
@@ -320,7 +322,7 @@ function DemographicHistograms({
                         value={item.value}
                         onSelect={(currentValue) => {
                           setExhibition((prev) =>
-                            prev === currentValue ? "" : currentValue
+                            prev === currentValue ? "" : currentValue,
                           );
                           setExhibitionOpen(false);
                         }}
@@ -330,7 +332,7 @@ function DemographicHistograms({
                             "mr-2 h-4 w-4",
                             exhibition === item.value
                               ? "opacity-100"
-                              : "opacity-0"
+                              : "opacity-0",
                           )}
                         />
                         {item.label}
@@ -345,7 +347,7 @@ function DemographicHistograms({
       </div>
 
       {/* Bar Charts */}
-      <div className="h-full flex-1 grid grid-cols-1 md:grid-cols-3 gap-4 overflow-hidden">
+      <div className="grid h-full flex-1 grid-cols-1 gap-4 overflow-hidden md:grid-cols-3">
         <BarChart data={getNationalityData(filteredArtists)} />
         <BarChart
           data={getGenderDistribution(filteredArtists)}

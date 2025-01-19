@@ -7,7 +7,7 @@ export function getNationalityData(artists: Artist[]) {
     if (artist.nationality) {
       nationalityCounts.set(
         artist.nationality,
-        (nationalityCounts.get(artist.nationality) || 0) + 1
+        (nationalityCounts.get(artist.nationality) || 0) + 1,
       );
     }
   });

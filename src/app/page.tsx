@@ -38,7 +38,7 @@ export default function LandingPage() {
   });
 
   const [scrollTimeout, setScrollTimeout] = useState<NodeJS.Timeout | null>(
-    null
+    null,
   );
   const [isManualScrolling, setIsManualScrolling] = useState(false);
 
@@ -110,7 +110,7 @@ export default function LandingPage() {
     <>
       {/* Progress bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-coffee z-50"
+        className="bg-coffee fixed left-0 right-0 top-0 z-50 h-1"
         style={{ scaleX }}
       />
 
@@ -120,12 +120,12 @@ export default function LandingPage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="h-screen min-h-screen max-h-screen flex flex-col items-center justify-center bg-latte"
+          className="bg-latte flex h-screen max-h-screen min-h-screen flex-col items-center justify-center"
         >
-          <h1 className="text-7xl md:text-9xl font-bold text-center mb-4 text-coffee">
+          <h1 className="text-coffee mb-4 text-center text-7xl font-bold md:text-9xl">
             ArtVis
           </h1>
-          <p className="text-3xl md:text-4xl text-center text-espresso">
+          <p className="text-espresso text-center text-3xl md:text-4xl">
             Insight into Art
           </p>
         </motion.section>

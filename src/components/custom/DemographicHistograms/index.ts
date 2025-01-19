@@ -1,1 +1,1 @@
-export { default  } from "./DemographicHistograms";
+export { default } from "./DemographicHistograms";

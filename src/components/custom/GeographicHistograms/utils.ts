@@ -2,17 +2,20 @@ import { Exhibition } from "lib/data";
 
 export function getCountryData(
   exhibitions: Exhibition[],
-  selectedContinent: string
+  selectedContinent: string,
 ) {
   if (!selectedContinent) return [];
 
   const countryCount = exhibitions
     .filter((e) => e.continent === selectedContinent)
     .filter((e) => e.country && e.country !== "-" && e.country !== "Unknown")
-    .reduce((acc, exhibition) => {
-      acc[exhibition.country] = (acc[exhibition.country] || 0) + 1;
-      return acc;
-    }, {} as Record<string, number>);
+    .reduce(
+      (acc, exhibition) => {
+        acc[exhibition.country] = (acc[exhibition.country] || 0) + 1;
+        return acc;
+      },
+      {} as Record<string, number>,
+    );
 
   return Object.entries(countryCount)
     .map(([country, count]) => ({
@@ -24,17 +27,20 @@ export function getCountryData(
 
 export function getCityData(
   exhibitions: Exhibition[],
-  selectedCountry: string
+  selectedCountry: string,
 ) {
   if (!selectedCountry) return [];
 
   const cityCount = exhibitions
     .filter((e) => e.country === selectedCountry)
     .filter((e) => e.city && e.city !== "-" && e.city !== "Unknown")
-    .reduce((acc, exhibition) => {
-      acc[exhibition.city] = (acc[exhibition.city] || 0) + 1;
-      return acc;
-    }, {} as Record<string, number>);
+    .reduce(
+      (acc, exhibition) => {
+        acc[exhibition.city] = (acc[exhibition.city] || 0) + 1;
+        return acc;
+      },
+      {} as Record<string, number>,
+    );
 
   return Object.entries(cityCount)
     .map(([city, count]) => ({
@@ -46,7 +52,7 @@ export function getCityData(
 
 export function getExhibitionData(
   exhibitions: Exhibition[],
-  selectedCity: string
+  selectedCity: string,
 ) {
   if (!selectedCity) return [];
 

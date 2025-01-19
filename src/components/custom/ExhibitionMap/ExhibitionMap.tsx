@@ -11,7 +11,7 @@ interface ExhibitionMapProps {
 function ExhibitionMap({ data, selectedYear }: ExhibitionMapProps) {
   const filteredExhibitions = useMemo(() => {
     return data.exhibitions.filter(
-      (exhibition) => exhibition.year === selectedYear
+      (exhibition) => exhibition.year === selectedYear,
     ) as Exhibition[];
   }, [data.exhibitions, selectedYear]);
 
@@ -23,7 +23,7 @@ function ExhibitionMap({ data, selectedYear }: ExhibitionMapProps) {
         return artist;
       })
       .filter(
-        (artist): artist is NonNullable<typeof artist> => artist !== undefined
+        (artist): artist is NonNullable<typeof artist> => artist !== undefined,
       );
 
     return artistConnections;
@@ -42,19 +42,19 @@ function ExhibitionMap({ data, selectedYear }: ExhibitionMapProps) {
       />
 
       {/* Legend */}
-      <div className="absolute top-4 right-4 bg-white p-2 rounded shadow z-[900] opacity-80">
-        <div className="text-base font-semibold mb-1">Exhibition Types:</div>
+      <div className="absolute right-4 top-4 z-[900] rounded bg-white p-2 opacity-80 shadow">
+        <div className="mb-1 text-base font-semibold">Exhibition Types:</div>
         <div className="flex flex-col gap-1">
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-red-500 opacity-60"></div>
+            <div className="h-3 w-3 rounded-full bg-red-500 opacity-60"></div>
             <span className="text-base">Group</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-green-500 opacity-60"></div>
+            <div className="h-3 w-3 rounded-full bg-green-500 opacity-60"></div>
             <span className="text-base">Auction</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-blue-500 opacity-60"></div>
+            <div className="h-3 w-3 rounded-full bg-blue-500 opacity-60"></div>
             <span className="text-base">Solo</span>
           </div>
         </div>
@@ -70,8 +70,8 @@ function ExhibitionMap({ data, selectedYear }: ExhibitionMapProps) {
               exhibition.type === "group"
                 ? "red"
                 : exhibition.type === "auction"
-                ? "green"
-                : "blue",
+                  ? "green"
+                  : "blue",
             opacity: 1,
             fillOpacity: 0.6,
             weight: 1,
@@ -84,12 +84,12 @@ function ExhibitionMap({ data, selectedYear }: ExhibitionMapProps) {
               <p className="text-sm">
                 {exhibition.city}, {exhibition.country}
               </p>
-              <h4 className="font-semibold mt-2">Artists:</h4>
-              <ul className="text-sm max-h-40 overflow-y-auto">
+              <h4 className="mt-2 font-semibold">Artists:</h4>
+              <ul className="max-h-40 overflow-y-auto text-sm">
                 {getArtistsForExhibition(exhibition.exhibitionId).map(
                   (artist) => (
                     <li key={artist.artistId}>{artist.name}</li>
-                  )
+                  ),
                 )}
               </ul>
             </div>

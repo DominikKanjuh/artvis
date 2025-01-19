@@ -8,7 +8,7 @@ import dynamic from "next/dynamic";
 
 const ExhibitionMap = dynamic(
   () => import("components/custom/ExhibitionMap/ExhibitionMap"),
-  { ssr: false }
+  { ssr: false },
 );
 
 export default function GlobalExhibitions() {
@@ -21,18 +21,18 @@ export default function GlobalExhibitions() {
 
   if (isLoading) {
     return (
-      <div className="h-screen bg-latte text-espresso font-serif flex flex-col">
+      <div className="bg-latte text-espresso flex h-screen flex-col font-serif">
         <Header />
-        <main className="flex-1 container mx-auto px-4 py-4 flex flex-col">
-          <div className="flex gap-4 w-full justify-between items-center mb-4">
+        <main className="container mx-auto flex flex-1 flex-col px-4 py-4">
+          <div className="mb-4 flex w-full items-center justify-between gap-4">
             <Skeleton>
-              <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-left lg:text-center text-coffee opacity-0">
+              <h1 className="text-coffee text-left text-xl font-bold opacity-0 md:text-2xl lg:text-center lg:text-3xl">
                 Global Exhibitions Map
               </h1>
             </Skeleton>
             <TimelineSkeleton />
           </div>
-          <div className="p-2 flex-1 bg-cream rounded-lg shadow-md">
+          <div className="bg-cream flex-1 rounded-lg p-2 shadow-md">
             <Skeleton className="h-full w-full" />
           </div>
         </main>
@@ -42,8 +42,8 @@ export default function GlobalExhibitions() {
 
   if (error || !data) {
     return (
-      <div className="h-screen bg-latte text-espresso font-serif flex flex-col items-center justify-center text-center bg-cream p-6 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-espresso mb-4">
+      <div className="bg-latte text-espresso bg-cream flex h-screen flex-col items-center justify-center rounded-lg p-6 text-center font-serif shadow-md">
+        <h2 className="text-espresso mb-4 text-2xl font-bold">
           Oops! Something went wrong.
         </h2>
         <p className="text-espresso text-lg">
@@ -54,16 +54,16 @@ export default function GlobalExhibitions() {
   }
 
   return (
-    <div className="h-screen bg-latte text-espresso font-serif flex flex-col">
+    <div className="bg-latte text-espresso flex h-screen flex-col font-serif">
       <Header />
-      <main className="flex-1 container mx-auto px-4 py-4 flex flex-col">
-        <div className="flex gap-4 w-full justify-between items-center mb-4">
-          <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-left lg:text-center text-coffee">
+      <main className="container mx-auto flex flex-1 flex-col px-4 py-4">
+        <div className="mb-4 flex w-full items-center justify-between gap-4">
+          <h1 className="text-coffee text-left text-xl font-bold md:text-2xl lg:text-center lg:text-3xl">
             Global Exhibitions Map
           </h1>
           <Timeline onYearChange={handleYearChange} />
         </div>
-        <div className="p-2 flex-1 bg-cream rounded-lg shadow-md">
+        <div className="bg-cream flex-1 rounded-lg p-2 shadow-md">
           <ExhibitionMap data={data} selectedYear={selectedYear} />
         </div>
       </main>

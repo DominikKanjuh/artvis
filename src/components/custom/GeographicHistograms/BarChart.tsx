@@ -39,7 +39,7 @@ export function BarChart({
 
   return (
     <div
-      className="h-full space-y-2 p-4 overflow-y-auto bg-white rounded-lg shadow"
+      className="h-full space-y-2 overflow-y-auto rounded-lg bg-white p-4 shadow"
       style={{
         maxHeight: !isMobile && maxHeight ? `${maxHeight}px` : undefined,
       }}
@@ -53,7 +53,7 @@ export function BarChart({
                 <span>{item.label}</span>
                 <span>{item.value}</span>
               </div>
-              <div className="w-full h-2 rounded-full bg-gray-200">
+              <div className="h-2 w-full rounded-full bg-gray-200">
                 <motion.div
                   className="h-2 rounded-full"
                   style={{
@@ -71,14 +71,14 @@ export function BarChart({
           ))}
         </div>
       ) : (
-        <div className="h-full flex flex-col justify-end">
-          <div className="flex-1 flex items-end gap-2">
+        <div className="flex h-full flex-col justify-end">
+          <div className="flex flex-1 items-end gap-2">
             {data.map((item, index) => (
               <div
                 key={index}
-                className="h-full flex-1 flex flex-col items-center"
+                className="flex h-full flex-1 flex-col items-center"
               >
-                <div className="w-full  h-full flex flex-col justify-end">
+                <div className="flex h-full w-full flex-col justify-end">
                   <motion.div
                     className="w-full"
                     style={{
@@ -96,7 +96,7 @@ export function BarChart({
               </div>
             ))}
           </div>
-          <div className="flex justify-around mt-2 text-sm">
+          <div className="mt-2 flex justify-around text-sm">
             {data.map((item, index) => (
               <div key={index} className="text-center">
                 <div>{item.label}</div>

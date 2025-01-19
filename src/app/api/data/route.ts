@@ -11,12 +11,12 @@ export async function GET() {
     if (error instanceof Error) {
       return NextResponse.json(
         { error: "Failed to load data", details: error.message },
-        { status: 500 }
+        { status: 500 },
       );
     } else {
       return NextResponse.json(
         { error: "Failed to load data", details: "Unknown error" },
-        { status: 500 }
+        { status: 500 },
       );
     }
   }

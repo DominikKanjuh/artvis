@@ -13,23 +13,23 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="bg-cream shadow-md relative">
+    <header className="bg-cream relative shadow-md">
       <nav className="container mx-auto px-4 py-4">
-        <div className="flex justify-between items-center gap-8">
-          <Link href="/" className="text-4xl font-bold text-coffee shrink-0">
+        <div className="flex items-center justify-between gap-8">
+          <Link href="/" className="text-coffee shrink-0 text-4xl font-bold">
             ArtVis
           </Link>
 
           {/* Desktop Navigation */}
-          <ul className="hidden md:flex space-x-8 justify-end flex-1">
+          <ul className="hidden flex-1 justify-end space-x-8 md:flex">
             {navItems.map((item) => (
               <li key={item.name}>
                 <Link
                   href={item.href}
-                  className="text-coffee hover:text-brown font-semibold transition-colors relative group"
+                  className="text-coffee hover:text-brown group relative font-semibold transition-colors"
                 >
                   {item.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brown transition-all duration-300 group-hover:w-full" />
+                  <span className="bg-brown absolute -bottom-1 left-0 h-0.5 w-0 transition-all duration-300 group-hover:w-full" />
                 </Link>
               </li>
             ))}
@@ -37,7 +37,7 @@ function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-coffee"
+            className="text-coffee md:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <Menu size={24} />
@@ -46,17 +46,17 @@ function Header() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="absolute z-[1000] top-full left-0 right-0 bg-cream shadow-md md:hidden">
-            <ul className="container mx-auto px-4 py-2 space-y-4">
+          <div className="bg-cream absolute left-0 right-0 top-full z-[1000] shadow-md md:hidden">
+            <ul className="container mx-auto space-y-4 px-4 py-2">
               {navItems.map((item) => (
                 <li key={item.name} className="text-right">
                   <Link
                     href={item.href}
-                    className="block text-coffee font-semibold py-2 transition-all relative group active:text-brown"
+                    className="text-coffee active:text-brown group relative block py-2 font-semibold transition-all"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     <span className="relative z-10">{item.name}</span>
-                    <span className="absolute inset-0 bg-latte transform scale-x-0 origin-right transition-transform group-hover:scale-x-100 group-active:scale-x-100" />
+                    <span className="bg-latte absolute inset-0 origin-right scale-x-0 transform transition-transform group-hover:scale-x-100 group-active:scale-x-100" />
                   </Link>
                 </li>
               ))}
