@@ -1,6 +1,12 @@
 "use client";
 
-import { Header, Timeline, DemographicHistograms } from "components/custom";
+import { Skeleton } from "components/components/ui/skeleton";
+import {
+  Header,
+  Timeline,
+  TimelineSkeleton,
+  DemographicHistograms,
+} from "components/custom";
 import { useData } from "hooks/useData";
 import { useState } from "react";
 
@@ -12,8 +18,39 @@ export default function Demographics() {
     setSelectedYear(year);
   };
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error || !data) return <div>Error: {error?.message}</div>;
+  if (isLoading) {
+    return (
+      <div className="h-screen bg-latte text-espresso font-serif flex flex-col">
+        <Header />
+        <main className="flex-1 container mx-auto px-4 py-4 flex flex-col">
+          <div className="flex gap-4 w-full justify-between items-center mb-4">
+            <Skeleton>
+              <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-left lg:text-center text-coffee opacity-0">
+                Artist Demographics
+              </h1>
+            </Skeleton>
+            <TimelineSkeleton />
+          </div>
+          <div className="flex-1 bg-cream rounded-lg shadow-md p-4">
+            <Skeleton className="h-full w-full" />
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  if (error || !data) {
+    return (
+      <div className="h-screen bg-latte text-espresso font-serif flex flex-col items-center justify-center text-center bg-cream p-6 rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold text-espresso mb-4">
+          Oops! Something went wrong.
+        </h2>
+        <p className="text-espresso text-lg">
+          {error?.message || "Error no data"}
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="h-screen bg-latte text-espresso font-serif flex flex-col">
